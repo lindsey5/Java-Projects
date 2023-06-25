@@ -41,7 +41,7 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 	private Reports reportPage = new Reports();
 	
 	private CategoryButton meals,drinks,sides,desserts,combo;
-	private boolean isSelected=false;//This is to show and hide category buttons
+	private boolean isShowed=false;//This is to show and hide category buttons
 	private boolean clicked = false; //This is to increased and decreased the width of rightPanel
 	
 	
@@ -166,7 +166,7 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				g2.setStroke(new BasicStroke(2f));
 				g2.setPaint(getForeground());
-				if(!isSelected) {
+				if(!isShowed) {
 					g2.drawLine(146, 28, 155, 35);
 					g2.drawLine(164, 28, 155, 35);
 				}else {
@@ -242,8 +242,7 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 		cardPanel.add(reportPage,"8");
 		
 		setVisible(true);
-		
-		showCategoryButtons();
+		hideCategoryButtons();
         startTitleThread("Admin Panel");
         showPanel("1");
         
@@ -401,13 +400,13 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 			
 		}else if(e.getSource()==menu) {
 			
-			if(!isSelected) {
+			if(!isShowed) {
 				showCategoryButtons(); 
-				isSelected=true;
+				isShowed=true;
 				//menu.repaint();
 			}else {
 				hideCategoryButtons(); 
-				isSelected=false;	
+				isShowed=false;	
 				//menu.repaint();
 			}
 			rectY = menu.getY();

@@ -166,7 +166,7 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==back) {
 			this.dispose();
-			new loginPage();
+			new LoginPage();
 		}
 		
 		if(e.getSource()==submit) {
@@ -274,7 +274,7 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 			  
 			  
 			  this.dispose();
-			  new loginPage();
+			  new LoginPage();
 			 
 		  }
 		  

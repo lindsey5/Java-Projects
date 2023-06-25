@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 
 import ObjectsAndInterfaces.AbstractWindow;
 import ObjectsAndInterfaces.CategoryButton;
-import login.loginPage;
+import login.LoginPage;
 
 public class Window extends AbstractWindow implements ActionListener{
 	
@@ -456,7 +456,7 @@ public class Window extends AbstractWindow implements ActionListener{
 			
 		}else if(e.getSource()==logout) {
 			this.dispose();
-			new loginPage();
+			new LoginPage();
 		}
 		
 		

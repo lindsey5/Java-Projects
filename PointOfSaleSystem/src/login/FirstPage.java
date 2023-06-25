@@ -43,7 +43,7 @@ public class FirstPage extends JFrame {
 			user.setBackground(new Color(148,0,211));
 			user.setForeground(Color.WHITE);
 			user.addActionListener((e)->{
-				new loginPage(); 
+				new LoginPage(); 
 				dispose();});
 			
 			JButton closeButton = new JButton("X");

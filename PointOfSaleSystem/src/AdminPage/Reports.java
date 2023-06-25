@@ -222,7 +222,7 @@ public class Reports extends JPanel {
 	        while (rs.next()) {
 	        	double totalSales = rs.getDouble("total_ammount");
 	        	String date = rs.getString("date");
-	            dataset.addValue(totalSales, "Sales",date );
+	            dataset.addValue(totalSales, "Sales",date);
 	        }
 
 	        conn.close();
@@ -231,10 +231,10 @@ public class Reports extends JPanel {
 	    }
 
 	    JFreeChart chart = ChartFactory.createBarChart(
-	        "Sales Status",    // Chart title
-	        "Weekly Sales",            // X-axis label
-	        "Sales",            // Y-axis label
-	        dataset,            // Dataset
+	        "Sales Status",// Chart title
+	        "",// X-axis label
+	        "Sales",// Y-axis label
+	        dataset, // Dataset
 	        PlotOrientation.VERTICAL,
 	        false,
 	        true,
@@ -245,16 +245,18 @@ public class Reports extends JPanel {
 	    CategoryPlot plot = chart.getCategoryPlot();
 	    plot.getRenderer().setSeriesPaint(0, Color.GREEN);
 	    BarRenderer renderer = (BarRenderer) plot.getRenderer();
-	   // renderer.setShadowVisible(false);
+	    //renderer.setShadowVisible(false);
 	    renderer.setBarPainter(new StandardBarPainter());
 	    plot.setBackgroundPaint(new Color(54,50,50));
 	    plot.getRangeAxis().setTickLabelPaint(Color.WHITE);
 	    plot.getRangeAxis().setLabelPaint(Color.WHITE);
 	    plot.getDomainAxis().setTickLabelPaint(Color.WHITE);
+	    //plot.getDomainAxis().setLabelFont(new Font("Arial",Font.BOLD,15));
 	    plot.getDomainAxis().setLabelPaint(Color.WHITE);
 	    
 	    TextTitle title = chart.getTitle();
 	    title.setPaint(Color.WHITE);
+	    title.setFont(new Font("Arial",Font.BOLD,20));
 
 	    // Create a ChartPanel to display the chart
 	    ChartPanel chartPanel = new ChartPanel(chart);
