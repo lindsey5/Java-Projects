@@ -236,7 +236,7 @@ public class ProfilePage extends JPanel implements ActionListener {
 		
 			JOptionPane.showMessageDialog(null, "Update Successfully");
 		}catch(SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Username already taken");
 		}
 	}
 		
@@ -274,28 +274,7 @@ public class ProfilePage extends JPanel implements ActionListener {
 			}
 			
 			if(e.getSource()==save) {
-				try {
-					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
-					
-					if(!username.equals(usernametxt.getText())) {
-					PreparedStatement stmt = conn.prepareStatement("SELECT * FROM accounttable WHERE username = ?");
-					stmt.setString(1, usernametxt.getText());
-					ResultSet rs = stmt.executeQuery();
-					
-					if(rs.next()) {
-						
-						JOptionPane.showMessageDialog(null, "Username Already Taken","",JOptionPane.ERROR_MESSAGE);
-						
-					}else {
-						update();
-					}
-					}else {
-						update();
-					}
-				 
-				}catch(SQLException e1) {
-					e1.printStackTrace();
-				}
+				update();
 			}
 			
 			
