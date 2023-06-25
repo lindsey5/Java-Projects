@@ -73,7 +73,6 @@ public abstract class AbstractWindow extends JFrame{
 		cardLayout.show(cardPanel, num);
 	}
 	
-	
 	public void startTitleThread(String titleText) {
 		
 		titleThread = new Thread(new Runnable() {

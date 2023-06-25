@@ -133,12 +133,12 @@ public class ProfilePage extends JPanel implements ActionListener {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				g2.setClip(new Ellipse2D.Double(0,0,getWidth(),getHeight()));
-				super.paintComponent(g);
+				super.paintComponent(g2);
 			}
 		};
 		profile.setBounds(100, 60, 150, 150);
 		profile.setBackground(Color.DARK_GRAY);
-		//profile.setOpaque(true);
+		profile.setOpaque(true);
 		
 		panel = new RoundRectPanel(40,40) {
 			/**
@@ -236,7 +236,7 @@ public class ProfilePage extends JPanel implements ActionListener {
 		
 			JOptionPane.showMessageDialog(null, "Update Successfully");
 		}catch(SQLException e) {
-			JOptionPane.showMessageDialog(null, "Username is already taken","Invalid",JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
 	}
 		
@@ -265,6 +265,7 @@ public class ProfilePage extends JPanel implements ActionListener {
 					 Image img = icon.getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_AREA_AVERAGING);
 					 icon = new ImageIcon(img);
 					 profile.setIcon(icon);
+					 
 					 imgData = imageData;
 
 				 }catch(IOException e1) {
@@ -273,10 +274,27 @@ public class ProfilePage extends JPanel implements ActionListener {
 			}
 			
 			if(e.getSource()==save) {
-				if(usernametxt.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Username should not Blank","",JOptionPane.ERROR_MESSAGE);
-				}else {
-					update();
+				try {
+					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
+					
+					if(!username.equals(usernametxt.getText())) {
+					PreparedStatement stmt = conn.prepareStatement("SELECT * FROM accounttable WHERE username = ?");
+					stmt.setString(1, usernametxt.getText());
+					ResultSet rs = stmt.executeQuery();
+					
+					if(rs.next()) {
+						
+						JOptionPane.showMessageDialog(null, "Username Already Taken","",JOptionPane.ERROR_MESSAGE);
+						
+					}else {
+						update();
+					}
+					}else {
+						update();
+					}
+				 
+				}catch(SQLException e1) {
+					e1.printStackTrace();
 				}
 			}
 			

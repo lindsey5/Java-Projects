@@ -33,9 +33,6 @@ public class historyPage extends JPanel implements ActionListener {
     String category;
     
 	historyPage(){
-		/*table.setRowMargin(10); //Sets the amount of empty space between cells in adjacent rows.
-		table.setShowGrid(false);
-		table.setRowHeight(100);*/
 		
 		combobox = new JComboBox<>();
 		combobox.setBounds(90,30,100,30);
@@ -71,6 +68,8 @@ public class historyPage extends JPanel implements ActionListener {
 		this.add(searchfield);
 		this.add(combobox);
 		this.add(scrollPane);
+		//this.add(printReport);
+		
 		setAllDataToTable();
 		
 	}
@@ -98,14 +97,14 @@ public class historyPage extends JPanel implements ActionListener {
 				try {
 					Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/foodsystemdb","root","");
 				    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM orderhistory WHERE (orderNo LIKE '%" +searchText+ "%'"
-				    		+ "OR accountName LIKE '%" +searchText+ "%'"
-					    	+ " OR orders LIKE '%"+searchText+"%'"
-					    	+ " OR date LIKE '%"+searchText+"%'"
-					    	+ " OR time LIKE '%"+searchText+"%'"
-					    	+ " OR payment LIKE '%"+searchText+"%'"
-					    	+ " OR total LIKE '%"+searchText+"%'"
-					    	+ " OR changee LIKE '%"+searchText+"%')"
-					    	+ text);
+					    	+ "OR accountName LIKE '%" +searchText+ "%'"
+					    			+ " OR orders LIKE '%"+searchText+"%'"
+					    			+ " OR date LIKE '%"+searchText+"%'"
+					    			+ " OR time LIKE '%"+searchText+"%'"
+					    			+ " OR payment LIKE '%"+searchText+"%'"
+					    			+ " OR total LIKE '%"+searchText+"%'"
+					    			+ " OR changee LIKE '%"+searchText+"%')"
+					    					+ text);
 				    if(category.equals("today")) {
 				    	stmt.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
 				    	
@@ -214,6 +213,8 @@ public class historyPage extends JPanel implements ActionListener {
 						rs.getString("changee")});	
 			}
 		    
+		    
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -294,7 +295,9 @@ public class historyPage extends JPanel implements ActionListener {
 				setThisMonthDataToTable();
 			}
 		}
+		
+		
+		
 	}
-	
 
 }

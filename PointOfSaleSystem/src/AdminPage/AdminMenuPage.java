@@ -297,8 +297,8 @@ public class AdminMenuPage extends JPanel implements ActionListener, MenuInterfa
 		  int result = filechooser.showOpenDialog(null);
 		  //System.out.println(result);
 		  if(result != JFileChooser.APPROVE_OPTION) {
-			  return;
-		  }
+		  return;
+	   }
 	   File selectedFile = filechooser.getSelectedFile();
 		 
 		try {
@@ -313,6 +313,8 @@ public class AdminMenuPage extends JPanel implements ActionListener, MenuInterfa
 			 icon = new ImageIcon(img);
 			 
 			 picture.setIcon(icon);
+			 
+			 
 			 
 		     }catch(IOException e1) {
 		    	 e1.printStackTrace();

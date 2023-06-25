@@ -233,19 +233,21 @@ public class RegisterPage extends JFrame implements ActionListener {
 		
 		//Checks if Accountname is already exist
 		try {
-			Connection Conn = DriverManager.getConnection(url,"root","");
-			PreparedStatement stmt = Conn.prepareStatement("SELECT * FROM accounttable WHERE accountname=? ");
-		    stmt.setString(1, accountName.getText());
-		    ResultSet rs = stmt.executeQuery();
-		    if(rs.next()) {
-		        accnameExist = true;
-		    }        	
+			  Connection Conn = DriverManager.getConnection(url,"root","");
+			  PreparedStatement stmt = Conn.prepareStatement("SELECT * FROM accounttable WHERE accountname=? ");
+		      stmt.setString(1, accountName.getText());
+				        
+			  ResultSet rs = stmt.executeQuery();
+				        
+			   if(rs.next()) {
+		        	accnameExist = true;
+			   }        	
 				        	
-		}catch(SQLException e1) {
+		     }catch(SQLException e1) {
 		    	 
-			e1.printStackTrace();
+				 e1.printStackTrace();
 				 
-			}
+			 }
 		Pattern uppercasePattern = Pattern.compile("[A-Z]");
         Pattern lowercasePattern = Pattern.compile("[a-z]");
 	    Matcher uppercaseMatcher = uppercasePattern.matcher(pass);
@@ -279,7 +281,7 @@ public class RegisterPage extends JFrame implements ActionListener {
 				 && !pass.contains("=")
 				 && !pass.contains("+")){
 			
-			JOptionPane.showMessageDialog(null,"<html>USE ATLEAST ONE SPECIAL CHARACTERS TO YOUR PASSWORD <br> (!,@,#,$,%,^,&,*,(,),-,_,=,+)</html>","",JOptionPane.ERROR_MESSAGE );
+			JOptionPane.showMessageDialog(null,"<html>" + "USE ATLEAST ONE SPECIAL CHARACTERS TO YOUR PASSWORD <br> (!,@,#,$,%,^,&,*,(,),-,_,=,+)" + "</html>","",JOptionPane.ERROR_MESSAGE );
 			
 		}else if(!hasUppercase||!hasLowercase) {
 			 JOptionPane.showMessageDialog(null, "Password must have atleast one Uppercase letter and atleast one Lowercase letter","",JOptionPane.ERROR_MESSAGE);
