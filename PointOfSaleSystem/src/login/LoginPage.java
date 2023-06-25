@@ -25,8 +25,9 @@ import javax.swing.JTextField;
 import EventHandler.ItemEventHandler;
 import EventHandler.MouseInputs;
 import ObjectsAndInterfaces.GradientButton;
+import ObjectsAndInterfaces.ProgressFrame;
 
-public class loginPage extends JFrame implements ActionListener {
+public class LoginPage extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -48,7 +49,7 @@ public class loginPage extends JFrame implements ActionListener {
 	Thread incorrectpassThread;
 	Thread incorrectusernameThread;
 	
-	public loginPage(){
+	public LoginPage(){
 		
 		ImageIcon icon = new ImageIcon("res/profileIcon.png");
 		Image img = icon.getImage().getScaledInstance(150, 150, java.awt.Image.SCALE_AREA_AVERAGING);
@@ -285,7 +286,7 @@ public class loginPage extends JFrame implements ActionListener {
 			if(input==143) {
 			
 			this.dispose();
-			new registerPage();
+			new RegisterPage();
 			
 			}else {
 				JOptionPane.showMessageDialog(null, "Incorrect Pin","",JOptionPane.ERROR_MESSAGE);

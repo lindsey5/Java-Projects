@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		bullets = new ArrayList<>();
 		player = new Player((GAME_WIDTH/2) - (PLAYER_WIDTH/2), GAME_HEIGHT - PLAYER_HEIGHT * 2, PLAYER_WIDTH, PLAYER_HEIGHT);
+		
 		this.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 		this.setBackground(Color.BLACK);
 		this.addMouseListener(new MouseHandler(player, this));
@@ -124,7 +125,6 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	void checkCollisions() {
-		
 		
 		if(enemies.get(0).getX()< 0 ) {
 			for(Enemy enemy :enemies) {

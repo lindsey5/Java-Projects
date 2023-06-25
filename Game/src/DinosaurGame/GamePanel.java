@@ -64,11 +64,6 @@ public class GamePanel extends JPanel implements Runnable{
 				if(delta >=1) {
 					move();
 				    checkCollisions();
-				        
-				     if(obstacle.getX() < 0) {
-				    	newObstacle();
-				     }
-				        
 					repaint();
 					delta--;
 					drawCount++;
@@ -100,12 +95,16 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 			
 		if(!obstacle.isPassed() && obstacle.getX() < player.getX() - obstacle.width) {
-			score++;
+			score++; 
 			obstacle.setPassed(true);
 			/*if(score % 20 == 0) {
 				obstacleSpeed+=2;
 				//player.speed+=0.1;
 			}*/
+		}
+		
+		if(obstacle.getX() < 0) {
+		    	newObstacle();
 		}
 		
 		player.move();

@@ -27,6 +27,7 @@ public class Obstacle extends Rectangle {
 		super(x, y, WIDTH, HEIGHT);
 		this.id = id;
 		setXVelocity(speed);
+		
 		try {
 			if(id==0) {
 				image = ImageIO.read(getClass().getResourceAsStream("/DinosaurGame/cactus1.png"));
@@ -66,7 +67,6 @@ public class Obstacle extends Rectangle {
 	
 	void move() {
 		x+= xVelocity;
-		
 	}
 	
 	void setPassed(boolean passed) {

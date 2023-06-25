@@ -94,6 +94,7 @@ public class Player extends Rectangle {
 	void move() {
 		y += yVelocity;
 		yVelocity =gravity;
+		
 		//If the y-coordinate of character is 290 isJumping variable will be false	
 		if(y == 290) {
 			isJumping = false;

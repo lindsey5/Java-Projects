@@ -28,7 +28,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
 
-public class registerPage extends JFrame implements ActionListener {
+public class RegisterPage extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -53,7 +53,7 @@ public class registerPage extends JFrame implements ActionListener {
 	JButton exit;
 	JButton back;
 	
-	public registerPage(){
+	public RegisterPage(){
 		
 		title.setBounds(190, 15, 200, 80);
 		title.setFont(new Font("Arial",Font.BOLD,30));
@@ -233,21 +233,19 @@ public class registerPage extends JFrame implements ActionListener {
 		
 		//Checks if Accountname is already exist
 		try {
-			  Connection Conn = DriverManager.getConnection(url,"root","");
-			  PreparedStatement stmt = Conn.prepareStatement("SELECT * FROM accounttable WHERE accountname=? ");
-		      stmt.setString(1, accountName.getText());
-				        
-			  ResultSet rs = stmt.executeQuery();
-				        
-			   if(rs.next()) {
-		        	accnameExist = true;
-			   }        	
+			Connection Conn = DriverManager.getConnection(url,"root","");
+			PreparedStatement stmt = Conn.prepareStatement("SELECT * FROM accounttable WHERE accountname=? ");
+		    stmt.setString(1, accountName.getText());
+		    ResultSet rs = stmt.executeQuery();
+		    if(rs.next()) {
+		        accnameExist = true;
+		    }        	
 				        	
-		     }catch(SQLException e1) {
+		}catch(SQLException e1) {
 		    	 
-				 e1.printStackTrace();
+			e1.printStackTrace();
 				 
-			 }
+			}
 		Pattern uppercasePattern = Pattern.compile("[A-Z]");
         Pattern lowercasePattern = Pattern.compile("[a-z]");
 	    Matcher uppercaseMatcher = uppercasePattern.matcher(pass);
@@ -281,7 +279,7 @@ public class registerPage extends JFrame implements ActionListener {
 				 && !pass.contains("=")
 				 && !pass.contains("+")){
 			
-			JOptionPane.showMessageDialog(null,"<html>" + "USE ATLEAST ONE SPECIAL CHARACTERS TO YOUR PASSWORD <br> (!,@,#,$,%,^,&,*,(,),-,_,=,+)" + "</html>","",JOptionPane.ERROR_MESSAGE );
+			JOptionPane.showMessageDialog(null,"<html>USE ATLEAST ONE SPECIAL CHARACTERS TO YOUR PASSWORD <br> (!,@,#,$,%,^,&,*,(,),-,_,=,+)</html>","",JOptionPane.ERROR_MESSAGE );
 			
 		}else if(!hasUppercase||!hasLowercase) {
 			 JOptionPane.showMessageDialog(null, "Password must have atleast one Uppercase letter and atleast one Lowercase letter","",JOptionPane.ERROR_MESSAGE);
@@ -317,7 +315,7 @@ public class registerPage extends JFrame implements ActionListener {
 				e1.printStackTrace();
 		    }   
 		    	this.dispose();
-		    	new loginPage();    
+		    	new LoginPage();    
 		   	}
 	}
 	
@@ -345,7 +343,7 @@ public class registerPage extends JFrame implements ActionListener {
 			dispose();
 		}else if(e.getSource()==back) {
 			dispose();
-			new loginPage();
+			new LoginPage();
 			
 		}
 		

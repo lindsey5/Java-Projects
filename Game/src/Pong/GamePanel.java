@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
 		newPaddles();
 		newBall();
 		gameThread.start();
-		repaint();
+		// repaint();
 	}
 	
 	
