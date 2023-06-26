@@ -236,10 +236,10 @@ public class ProfilePage extends JPanel implements ActionListener {
 		
 			JOptionPane.showMessageDialog(null, "Update Successfully");
 		}catch(SQLException e) {
-			JOptionPane.showMessageDialog(null, "Username already taken");
+			JOptionPane.showMessageDialog(null, "Username already taken","Invalid",JOptionPane.ERROR_MESSAGE);
 		}
-	}
 		
+	}
 		
 
 		@Override
@@ -274,7 +274,24 @@ public class ProfilePage extends JPanel implements ActionListener {
 			}
 			
 			if(e.getSource()==save) {
-				update();
+				
+				try {
+				int pin = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter pin"));
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
+				PreparedStatement stmt = conn.prepareStatement("SELECT pin FROM accounttable WHERE accountname=? and pin=?");
+				stmt.setString(1, accountname.getText());
+				stmt.setInt(2, pin);
+				ResultSet rs = stmt.executeQuery();
+				if(rs.next()) {
+					update();
+				}
+				
+				}catch(SQLException e1) {
+					e1.printStackTrace();
+				}catch(NumberFormatException e1) {
+					JOptionPane.showMessageDialog(null, "Invalid Pin","",JOptionPane.ERROR_MESSAGE);
+				}
+				
 			}
 			
 			

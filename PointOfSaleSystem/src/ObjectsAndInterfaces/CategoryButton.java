@@ -23,11 +23,11 @@ public class CategoryButton extends JButton{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if(!last) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.setStroke(new BasicStroke(0.5f));
-		g2.drawLine(30, 0, 30, getHeight());
-		g2.drawLine(30, getHeight()/2, 40, getHeight()/2);
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g2.setStroke(new BasicStroke(0.5f));
+			g2.drawLine(30, 0, 30, getHeight());
+			g2.drawLine(30, getHeight()/2, 40, getHeight()/2);
 		}else {
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

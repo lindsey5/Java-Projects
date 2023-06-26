@@ -37,7 +37,7 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 	private AdminMenuPage sidesMenu = new AdminMenuPage(dashBoard);
 	private AdminMenuPage dessertsMenu = new AdminMenuPage(dashBoard);
 	private AdminMenuPage combosMenu = new AdminMenuPage(dashBoard);
-	private historyPage historypage = new historyPage();
+	private HistoryPage historypage = new HistoryPage();
 	private Reports reportPage = new Reports();
 	
 	private CategoryButton meals,drinks,sides,desserts,combo;
