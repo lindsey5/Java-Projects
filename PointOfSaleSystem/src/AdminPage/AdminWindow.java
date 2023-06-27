@@ -230,7 +230,6 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER,10,0));
 		panel.add(button);
 		
-		
 		cardPanel.setLayout(cardLayout);
 		cardPanel.add(dashBoard,"1");
 		cardPanel.add(mealsMenu,"2");

@@ -275,23 +275,30 @@ public class ProfilePage extends JPanel implements ActionListener {
 			
 			if(e.getSource()==save) {
 				
-				try {
-				int pin = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter pin"));
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
-				PreparedStatement stmt = conn.prepareStatement("SELECT pin FROM accounttable WHERE accountname=? and pin=?");
-				stmt.setString(1, accountname.getText());
-				stmt.setInt(2, pin);
-				ResultSet rs = stmt.executeQuery();
-				if(rs.next()) {
-					update();
-				}
+				if(!usernametxt.getText().isBlank()) {
+					try {
+						int pin = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter pin"));
+						Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
+						PreparedStatement stmt = conn.prepareStatement("SELECT pin FROM accounttable WHERE accountname=? and pin=?");
+						stmt.setString(1, accountname.getText());
+						stmt.setInt(2, pin);
+						ResultSet rs = stmt.executeQuery();
+						if(rs.next()) {
+							update();
+						}else {
+							JOptionPane.showMessageDialog(null, "Invalid Pin","",JOptionPane.ERROR_MESSAGE);
+
+						}
 				
-				}catch(SQLException e1) {
-					e1.printStackTrace();
-				}catch(NumberFormatException e1) {
-					JOptionPane.showMessageDialog(null, "Invalid Pin","",JOptionPane.ERROR_MESSAGE);
-				}
+					}catch(SQLException e1) {
+						e1.printStackTrace();
+					}catch(NumberFormatException e1) {
+						JOptionPane.showMessageDialog(null, "Invalid Pin","",JOptionPane.ERROR_MESSAGE);
+					}
 				
+				}else {
+					JOptionPane.showMessageDialog(null, "Username is Blank","Invalid",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			
 			

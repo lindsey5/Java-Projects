@@ -232,7 +232,7 @@ public class Reports extends JPanel {
 
 	    JFreeChart chart = ChartFactory.createBarChart(
 	        "Sales Status",    // Chart title
-	        "Weekly Sales",            // X-axis label
+	        "",            // X-axis label
 	        "Sales",            // Y-axis label
 	        dataset,            // Dataset
 	        PlotOrientation.VERTICAL,

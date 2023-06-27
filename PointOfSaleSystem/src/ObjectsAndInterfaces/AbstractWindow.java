@@ -69,11 +69,11 @@ public abstract class AbstractWindow extends JFrame{
 		this.add(cardPanel);
 	}
 	
-	public void showPanel(String num) {
+	protected void showPanel(String num) {
 		cardLayout.show(cardPanel, num);
 	}
 	
-	public void startTitleThread(String titleText) {
+	protected void startTitleThread(String titleText) {
 		
 		titleThread = new Thread(new Runnable() {
 			@Override

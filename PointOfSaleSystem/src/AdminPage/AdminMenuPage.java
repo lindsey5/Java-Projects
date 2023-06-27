@@ -46,11 +46,11 @@ public class AdminMenuPage extends JPanel implements ActionListener, MenuInterfa
 	JTextField itemname,pricetxt,itemCodetxt;
 	JLabel itemNamelbl,pricelbl,itemCodelbl;
 	byte[] imgData = null;
-    DashBoard dashBoard = new DashBoard();
+    DashBoard dashBoard;
     String category = " ";
 	
 	AdminMenuPage(DashBoard dashBoard){
-		this.dashBoard=dashBoard;
+		this.dashBoard = dashBoard;
 		
 		itemCodelbl = new JLabel("Item Code");
 		itemCodelbl.setBounds(60,570,150,30);
