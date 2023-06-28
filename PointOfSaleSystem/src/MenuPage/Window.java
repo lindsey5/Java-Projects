@@ -67,7 +67,7 @@ public class Window extends AbstractWindow implements ActionListener{
 		combosMenu.displayMenu("Combo");
 	
 		meals = new CategoryButton("Meals");
-		meals.setPreferredSize(new Dimension(200-1,40));
+		meals.setPreferredSize(new Dimension(200,40));
 		meals.setFont(new Font("Callibri",Font.BOLD,13));
 		meals.setHorizontalAlignment(SwingConstants.CENTER);
 		meals.setForeground(Color.WHITE);
@@ -76,7 +76,7 @@ public class Window extends AbstractWindow implements ActionListener{
 		meals.addActionListener(this);
 		
 		drinks = new CategoryButton("Drinks");
-		drinks.setPreferredSize(new Dimension(200-1,40));
+		drinks.setPreferredSize(new Dimension(200,40));
 		drinks.setFont(new Font("Callibri",Font.BOLD,13));
 		drinks.setHorizontalAlignment(SwingConstants.CENTER);
 		drinks.setForeground(Color.WHITE);
@@ -94,7 +94,7 @@ public class Window extends AbstractWindow implements ActionListener{
 		sides.addActionListener(this);
 		
 		desserts = new CategoryButton("Desserts");
-		desserts.setPreferredSize(new Dimension(200-1,40));
+		desserts.setPreferredSize(new Dimension(200,40));
 		desserts.setFont(new Font("Callibri",Font.BOLD,13));
 		desserts.setHorizontalAlignment(SwingConstants.CENTER);
 		desserts.setForeground(Color.WHITE);
@@ -103,7 +103,7 @@ public class Window extends AbstractWindow implements ActionListener{
 		desserts.addActionListener(this);
 		
 		combo = new CategoryButton("Combos");
-		combo.setPreferredSize(new Dimension(200-1,40));
+		combo.setPreferredSize(new Dimension(200,40));
 		combo.setFont(new Font("Callibri",Font.BOLD,13));
 		combo.setHorizontalAlignment(SwingConstants.CENTER);
 		combo.setForeground(Color.WHITE);
@@ -143,7 +143,7 @@ public class Window extends AbstractWindow implements ActionListener{
 		history.setFont(new Font("Callibri",Font.BOLD,15));
 		history.setContentAreaFilled(false);
 		history.addActionListener(this);
-		history.setFocusable(false);
+		history.setFocusable(false); 
 		
 		ImageIcon icon = new ImageIcon("res/user.png");
 		Image img = icon.getImage().getScaledInstance(25, 25, java.awt.Image.SCALE_AREA_AVERAGING);
@@ -152,7 +152,7 @@ public class Window extends AbstractWindow implements ActionListener{
 		profile = new JButton();
 		profile.setIcon(icon);
 		profile.setHorizontalTextPosition(JLabel.RIGHT);
-		profile.setPreferredSize(new Dimension(170-1,60));
+		profile.setPreferredSize(new Dimension(170,60));
 		profile.setBackground(new Color(54,50,50));
 		profile.setForeground(Color.WHITE);
 		profile.setFont(new Font("Callibri",Font.BOLD,15));
@@ -240,8 +240,6 @@ public class Window extends AbstractWindow implements ActionListener{
 	    startTitleThread("Point of Sale System");
 		
 	}
-	
-
 
 	@Override
 	public void showCategoryButtons() {

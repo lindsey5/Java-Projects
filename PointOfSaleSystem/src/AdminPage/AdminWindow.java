@@ -41,7 +41,7 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 	private Reports reportPage = new Reports();
 	
 	private CategoryButton meals,drinks,sides,desserts,combo;
-	private boolean isSelected=false;//This is to show and hide category buttons
+	private boolean isSelected = false;//This is to show and hide category buttons
 	private boolean clicked = false; //This is to increased and decreased the width of rightPanel
 	
 	
@@ -230,7 +230,6 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER,10,0));
 		panel.add(button);
 		
-		cardPanel.setLayout(cardLayout);
 		cardPanel.add(dashBoard,"1");
 		cardPanel.add(mealsMenu,"2");
 		cardPanel.add(drinksMenu,"3");
@@ -242,12 +241,13 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 		
 		setVisible(true);
 		
-		showCategoryButtons();
+		hideCategoryButtons();
         startTitleThread("Admin Panel");
         showPanel("1");
         
 	}
 	
+	@Override
 	public void decreasedRightPanelWidth() {
 		rightPanel.setPreferredSize(new Dimension(80,0));
 		logout.setText("");
@@ -287,6 +287,7 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 		reportPage.setLayout(new FlowLayout(FlowLayout.CENTER,60,40));
 	}
 	
+	@Override
 	public void increasedRightPanelWidth() {
 		
 		rightPanel.setPreferredSize(new Dimension(200,0));

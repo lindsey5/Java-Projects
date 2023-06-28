@@ -10,11 +10,11 @@ import javax.swing.JComponent;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 public class CustomScrollBarUI extends BasicScrollBarUI {
-	Color thumbcolor, trackColor, decreaseButtonColor, increaseButtonColor;
+	Color thumbcolor, thumbColor, decreaseButtonColor, increaseButtonColor;
 	
-	public CustomScrollBarUI(Color thumbcolor,Color trackColor, Color decreaseButtonColor, Color increaseButtonColor){
+	public CustomScrollBarUI(Color thumbcolor,Color thumbColor, Color decreaseButtonColor, Color increaseButtonColor){
 		this.thumbcolor=thumbcolor;
-		this.trackColor=trackColor;
+		this.thumbColor=thumbColor;
 		this.decreaseButtonColor=decreaseButtonColor;
 		this.increaseButtonColor=increaseButtonColor;
 	}
@@ -30,11 +30,11 @@ public class CustomScrollBarUI extends BasicScrollBarUI {
 	    }
 
 	    @Override
-	    protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+	    protected void paintTrack(Graphics g, JComponent c, Rectangle thumbBounds) {
 	        Graphics2D g2 = (Graphics2D) g.create();
 	        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-	        g2.setPaint(trackColor);
-	        g2.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
+	        g2.setPaint(thumbColor);
+	        g2.fillRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height);
 	        g2.dispose();
 	    }
 	    
