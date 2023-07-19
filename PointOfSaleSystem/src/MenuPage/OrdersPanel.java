@@ -178,33 +178,34 @@ public class OrdersPanel extends JPanel implements ActionListener {
 	void addToDataBase() {
 	    try {
 	    	
-	        for (int i = 0; i < orders.size(); i++) {
+	        for (Order order : orders) {
 	            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/foodsystemdb", "root", "");
 	            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM productsales WHERE itemName=? and date=? and size=?");
-	            stmt.setString(1, orders.get(i).getName());
+	            stmt.setString(1, order.getName());
 	            stmt.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
-	            stmt.setString(3, orders.get(i).getSize());
+	            stmt.setString(3, order.getSize());
 	            ResultSet rs = stmt.executeQuery();
 	            
 	            if (rs.next()) {
 	                int quantity = rs.getInt("quantity");
 	                double total = rs.getDouble("total");
 	                PreparedStatement stmt1 = conn.prepareStatement("UPDATE productsales SET quantity=?, total=? WHERE itemName=? and date=? and size=?");
-	                stmt1.setInt(1, quantity + orders.get(i).getQuantity());
-	                stmt1.setDouble(2, total + orders.get(i).getPrice());
-	                stmt1.setString(3, orders.get(i).getName());
+	                stmt1.setInt(1, quantity + order.getQuantity());
+	                stmt1.setDouble(2, total + order.getPrice());
+	                stmt1.setString(3, order.getName());
 	                stmt1.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
-	                stmt1.setString(5, orders.get(i).getSize());
+	                stmt1.setString(5, order.getSize());
 	                stmt1.executeUpdate();
-	            } else {
+	                
+	            }else {
 	                PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO productsales (itemName, quantity, unitprice, total, date,size,category) VALUES (?,?,?,?,?,?,?)");
-	                stmt2.setString(1, orders.get(i).getName());
-	                stmt2.setInt(2, orders.get(i).getQuantity());
-	                stmt2.setDouble(3, orders.get(i).getUnitPrice());
-	                stmt2.setDouble(4, orders.get(i).getPrice());
+	                stmt2.setString(1, order.getName());
+	                stmt2.setInt(2, order.getQuantity());
+	                stmt2.setDouble(3, order.getUnitPrice());
+	                stmt2.setDouble(4, order.getPrice());
 	                stmt2.setDate(5, java.sql.Date.valueOf(LocalDate.now()));
-	                stmt2.setString(6, orders.get(i).getSize());
-	                stmt2.setString(7, orders.get(i).getCategory());
+	                stmt2.setString(6, order.getSize());
+	                stmt2.setString(7, order.getCategory());
 	                stmt2.executeUpdate();
 	            }
 	        }

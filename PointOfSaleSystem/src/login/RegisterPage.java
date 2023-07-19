@@ -35,23 +35,17 @@ public class RegisterPage extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel panel;
-	JTextField accountName = new JTextField();
-	JTextField username = new JTextField();
-	JPasswordField password = new JPasswordField();
-	JPasswordField confirmPassword = new JPasswordField();
-	JPasswordField pin = new JPasswordField();
-	JLabel accountnamelbl = new JLabel("Account Name");
-	JLabel usernamelbl = new JLabel("Username");
-	JLabel passwordlbl = new JLabel("Password");
-	JLabel conpasslbl = new JLabel("Confirm Password");
-	JLabel pinlbl = new JLabel("Enter Pin");
+	JTextField accountName = new JTextField(), username = new JTextField();
+	JPasswordField password = new JPasswordField(), confirmPassword = new JPasswordField(), pin = new JPasswordField();
+	JLabel accountnamelbl = new JLabel("Account Name"), 
+		   usernamelbl = new JLabel("Username"), 
+		   passwordlbl = new JLabel("Password"), 
+		   conpasslbl = new JLabel("Confirm Password"), 
+		   pinlbl = new JLabel("Enter Pin");
 	GradientButton submit = new GradientButton(new Color(0,255,127),new Color(0,100,0),new Color(144,238,144));
 	JLabel title = new JLabel("Sign Up");
-	JCheckBox checkbox1 = new JCheckBox();
-	JCheckBox checkbox2 = new JCheckBox();
-	JCheckBox checkbox3 = new JCheckBox();
-	JButton exit;
-	JButton back;
+	JCheckBox passCheckbox = new JCheckBox(), conPassCheckbox = new JCheckBox(), pinCheckbox = new JCheckBox();
+	JButton exit, back;
 	
 	public RegisterPage(){
 		
@@ -131,20 +125,20 @@ public class RegisterPage extends JFrame implements ActionListener {
 		icon2 = new ImageIcon(img2);
 		
 		
-		checkbox1.setBounds(330, 340, 40, 30);
-		checkbox1.setBackground(Color.DARK_GRAY);
-		checkbox1.setIcon(icon1);
-		checkbox1.addItemListener(new ItemEventHandler(checkbox1,password,icon1,icon2));
+		passCheckbox.setBounds(330, 340, 40, 30);
+		passCheckbox.setBackground(Color.DARK_GRAY);
+		passCheckbox.setIcon(icon1);
+		passCheckbox.addItemListener(new ItemEventHandler(passCheckbox,password,icon1,icon2));
 		
-		checkbox2.setBounds(330, 430, 40, 30);
-		checkbox2.setBackground(Color.DARK_GRAY);
-		checkbox2.setIcon(icon1);
-		checkbox2.addItemListener(new ItemEventHandler(checkbox2,confirmPassword,icon1,icon2));		
+		conPassCheckbox.setBounds(330, 430, 40, 30);
+		conPassCheckbox.setBackground(Color.DARK_GRAY);
+		conPassCheckbox.setIcon(icon1);
+		conPassCheckbox.addItemListener(new ItemEventHandler(conPassCheckbox,confirmPassword,icon1,icon2));		
 		
-		checkbox3.setBounds(330, 520, 40, 30);
-		checkbox3.setBackground(Color.DARK_GRAY);
-		checkbox3.setIcon(icon1);
-		checkbox3.addItemListener(new ItemEventHandler(checkbox3,pin,icon1,icon2));
+		pinCheckbox.setBounds(330, 520, 40, 30);
+		pinCheckbox.setBackground(Color.DARK_GRAY);
+		pinCheckbox.setIcon(icon1);
+		pinCheckbox.addItemListener(new ItemEventHandler(pinCheckbox,pin,icon1,icon2));
 		
 		
 		exit = new JButton("X");
@@ -172,11 +166,11 @@ public class RegisterPage extends JFrame implements ActionListener {
 		this.add(passwordlbl);
 		this.add(confirmPassword);
 		this.add(conpasslbl);
-		this.add(checkbox1);
-		this.add(checkbox2);
+		this.add(passCheckbox);
+		this.add(conPassCheckbox);
 		this.add(pin);
 		this.add(pinlbl);
-		this.add(checkbox3);
+		this.add(pinCheckbox);
 		this.add(submit);
 		this.add(back);
 		this.add(exit);
@@ -192,69 +186,93 @@ public class RegisterPage extends JFrame implements ActionListener {
 		g.drawLine(330, 559, 370, 559);
 	}
 	
-	void addAccountToDB() {
-		String pass = String.valueOf(password.getPassword());
-		String conPass = String.valueOf(confirmPassword.getPassword());
-		boolean confirm = pass.equals(conPass);
+	boolean confirmPass(String password, String confirmPass) {
 		
-		String url = "jdbc:mysql://localhost:3306/foodsystemdb";
+		if(password.equals(confirmPass)) return true;
 		
-		boolean usernameExist = false;
-	    boolean accnameExist = false;
-	    
-	    boolean flag = false;
-	    
-	    //Checks if the pin is integer
-	    try {
-	    //The text in variable pin will be Integer
-        Integer.parseInt(String.valueOf(pin.getPassword()));
-        flag = true;
-        
-        //Catch the NumberFormatException
-        }catch(NumberFormatException e1) {
-      			
-      	}
-	    
-		
+		else return false;
+	}
+	
+	boolean usernameExist() {
 		//Checks if Username is already exist
 		try {
-			 Connection Conn = DriverManager.getConnection(url,"root","");
-		       PreparedStatement stmt = Conn.prepareStatement("SELECT * FROM accounttable WHERE username=? ");
-		        stmt.setString(1, username.getText());
-		        
-		        ResultSet rs = stmt.executeQuery();
-		        
-		        if(rs.next()) {
-		        	usernameExist = true;	
-		        }
+			Connection Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
+			PreparedStatement stmt = Conn.prepareStatement("SELECT * FROM accounttable WHERE username=? ");
+			stmt.setString(1, username.getText());
+				        
+			ResultSet rs = stmt.executeQuery();
+				
+			if(rs.next()) {
+				return true;
+			}
+				
 		}catch(SQLException e1) {
 			e1.printStackTrace();
 		}
 		
+		
+		return false;
+	}
+	
+	boolean accNameExist() {
 		//Checks if Accountname is already exist
 		try {
-			  Connection Conn = DriverManager.getConnection(url,"root","");
-			  PreparedStatement stmt = Conn.prepareStatement("SELECT * FROM accounttable WHERE accountname=? ");
-		      stmt.setString(1, accountName.getText());
-				        
-			  ResultSet rs = stmt.executeQuery();
-				        
-			   if(rs.next()) {
-		        	accnameExist = true;
-			   }        	
-				        	
-		     }catch(SQLException e1) {
-		    	 
-				 e1.printStackTrace();
-				 
-			 }
+			Connection Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
+			PreparedStatement stmt = Conn.prepareStatement("SELECT * FROM accounttable WHERE accountname=? ");
+			stmt.setString(1, accountName.getText());
+						        
+			ResultSet rs = stmt.executeQuery();
+						        
+			if(rs.next()) {
+				return true;
+			}        	
+						        	
+		}catch(SQLException e1) {	    	 
+			e1.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	boolean isPinValid() {
+		 try {
+			 //Checks if the text in pin textfield can be an integer
+			 Integer.parseInt(String.valueOf(pin.getPassword()));
+			 return true;
+		        
+		//Catch the NumberFormatException
+		 }catch(NumberFormatException e1) {
+			 return false;
+		 }
+		 
+	}
+	
+	boolean hasUppercase(String pass) {
 		Pattern uppercasePattern = Pattern.compile("[A-Z]");
-        Pattern lowercasePattern = Pattern.compile("[a-z]");
-	    Matcher uppercaseMatcher = uppercasePattern.matcher(pass);
+		Matcher uppercaseMatcher = uppercasePattern.matcher(pass);
+		
+		if(uppercaseMatcher.find()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	boolean hasLowercase(String pass) {
+		Pattern lowercasePattern = Pattern.compile("[a-z]");
 	    Matcher lowercaseMatcher = lowercasePattern.matcher(pass);
 	    
-	    boolean hasUppercase =uppercaseMatcher.find();
-	    boolean hasLowercase =lowercaseMatcher.find();
+	    if(lowercaseMatcher.find()) {
+	    	return true;
+	    }else {
+	    	return false;
+	    }
+	}
+	
+	
+	void addAccountToDB() {
+		String pass = String.valueOf(password.getPassword());
+		String conPass = String.valueOf(confirmPassword.getPassword());
 		
 		if(accountName.getText().isEmpty() 
 				|| username.getText().isEmpty() 
@@ -263,7 +281,7 @@ public class RegisterPage extends JFrame implements ActionListener {
 				|| String.valueOf(pin.getPassword()).isEmpty() ) {
 			JOptionPane.showMessageDialog(null, "Fill the blanks","",JOptionPane.ERROR_MESSAGE);
 			
-		}else if(!confirm) {
+		}else if(!confirmPass(pass, conPass)) {
 		    JOptionPane.showMessageDialog(null, "Password does not match","",JOptionPane.ERROR_MESSAGE);
 		    
 		}else if (!pass.contains("!") 
@@ -281,9 +299,9 @@ public class RegisterPage extends JFrame implements ActionListener {
 				 && !pass.contains("=")
 				 && !pass.contains("+")){
 			
-			JOptionPane.showMessageDialog(null,"<html>" + "USE ATLEAST ONE SPECIAL CHARACTERS TO YOUR PASSWORD <br> (!,@,#,$,%,^,&,*,(,),-,_,=,+)" + "</html>","",JOptionPane.ERROR_MESSAGE );
+			JOptionPane.showMessageDialog(null,"Use atleast one special characters in your password (!,@,#,$,%,^,&,*,(,),-,_,=,+)","",JOptionPane.ERROR_MESSAGE );
 			
-		}else if(!hasUppercase||!hasLowercase) {
+		}else if(!hasUppercase(pass)||!hasLowercase(pass)) {
 			 JOptionPane.showMessageDialog(null, "Password must have atleast one Uppercase letter and atleast one Lowercase letter","",JOptionPane.ERROR_MESSAGE);
 		}else if(pass.length()<8 || pass.length()>20){
 			JOptionPane.showMessageDialog(null, "The length of Password should be 8-20","",JOptionPane.ERROR_MESSAGE);
@@ -291,23 +309,23 @@ public class RegisterPage extends JFrame implements ActionListener {
 		}else if(String.valueOf(pin.getPassword()).length()!=4) {
 			JOptionPane.showMessageDialog(null, "Pin should be 4 digits integer","",JOptionPane.ERROR_MESSAGE);
 			
-		}else if(accnameExist) {
+		}else if(accNameExist()) {
 			JOptionPane.showMessageDialog(null, "Account Name Already Exist","",JOptionPane.ERROR_MESSAGE);
-		}else if(usernameExist) {
+		}else if(usernameExist()) {
 			JOptionPane.showMessageDialog(null, "Username Already Exist","",JOptionPane.ERROR_MESSAGE);
 			
-		}else if(!flag) {
+		}else if(!isPinValid()) {
 			JOptionPane.showMessageDialog(null, "Pin should be 4 digits integer","",JOptionPane.ERROR_MESSAGE);
 			
 		}else{
 			try {
-				Connection Conn = DriverManager.getConnection(url,"root","");
+				Connection Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
 				PreparedStatement stmt = Conn.prepareStatement("INSERT INTO accounttable (accountName,username,password,pin,datecreated,timecreated) VALUES (?,?,?,?,?,?)");
 				stmt.setString(1, accountName.getText());
 				stmt.setString(2, username.getText());
 				stmt.setString(3, pass);
 				stmt.setString(4, String.valueOf(pin.getPassword()));
-				stmt.setDate(5, java.sql.Date.valueOf(LocalDate.now()));
+				stmt.setDate(5, java.sql.Date.valueOf(LocalDate.now())); 
 				stmt.setTime(6, java.sql.Time.valueOf(LocalTime.now()));
 				stmt.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Account Successfully Created");

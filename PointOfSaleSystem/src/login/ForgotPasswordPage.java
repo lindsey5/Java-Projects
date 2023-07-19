@@ -30,8 +30,7 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel icon;
-	JLabel title;
+	JLabel icon, title;
 	JTextField accountname;
 	JLabel accountnamelbl;
 	JButton back;
@@ -44,8 +43,7 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
     String accname = "";
     ImageIcon icon1 = new ImageIcon("res/show.png");
 	ImageIcon icon2 = new ImageIcon("res/hide.png");
-	JCheckBox checkbox1 = new JCheckBox();
-	JCheckBox checkbox2 = new JCheckBox();
+	JCheckBox passCheckbox = new JCheckBox(), conPassCheckbox = new JCheckBox();
 	Color color = Color.DARK_GRAY;
 	
 	public ForgotPasswordPage(){
@@ -72,7 +70,7 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 		passwordlbl.setForeground(Color.LIGHT_GRAY);
 		
 		password = new JPasswordField();
-		password.setBounds(115, 210, 230, 40);
+		password.setBounds(115, 210, 230, 40); 
 		password.setForeground(Color.WHITE);
 		password.setBackground(Color.DARK_GRAY);
 		password.setBorder(null);
@@ -87,22 +85,20 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 		Image img2 = icon2.getImage().getScaledInstance(30, 30, java.awt.Image.SCALE_AREA_AVERAGING);
 		icon2 = new ImageIcon(img2);
 		
-		checkbox1.setBounds(350, 210, 40, 30);
-		checkbox1.setBackground(Color.DARK_GRAY);
-		checkbox1.setIcon(icon1);
-		checkbox1.addItemListener(new ItemEventHandler(checkbox1,password,icon1,icon2));
+		passCheckbox.setBounds(350, 210, 40, 30);
+		passCheckbox.setBackground(Color.DARK_GRAY);
+		passCheckbox.setIcon(icon1);
+		passCheckbox.addItemListener(new ItemEventHandler(passCheckbox,password,icon1,icon2));
 		
-		checkbox2.setBounds(350, 300, 40, 30);
-		checkbox2.setBackground(Color.DARK_GRAY);
-		checkbox2.setIcon(icon1);
-		checkbox2.addItemListener(new ItemEventHandler(checkbox2,conpass,icon1,icon2));		
-		
+		conPassCheckbox.setBounds(350, 300, 40, 30);
+		conPassCheckbox.setBackground(Color.DARK_GRAY);
+		conPassCheckbox.setIcon(icon1);
+		conPassCheckbox.addItemListener(new ItemEventHandler(conPassCheckbox,conpass,icon1,icon2));		
 		
 		submit = new GradientButton(new Color(0,255,127),new Color(0,100,0),new Color(144,238,144));
 		submit.setText("Submit");
 		submit.setBounds(190,320,120,40);
 		submit.addActionListener(this);
-		
 		
 		back = new JButton("🡐");
 		back.setBackground(Color.DARK_GRAY);
@@ -136,7 +132,6 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 		title.setBounds(145, 130, 230, 50);
 		title.setForeground(new Color(0,255,0));
 		title.setFont(new Font("Arial",Font.BOLD,25));
-		
 		
 		this.setSize(500,450);
 		this.setLocationRelativeTo(null);
@@ -188,14 +183,13 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 							this.add(conpass);
 							this.add(conpasslbl);
 							this.add(submit1);
-							this.add(checkbox1);
-							this.add(checkbox2);
+							this.add(passCheckbox);
+							this.add(conPassCheckbox);
 							accountname.setVisible(false);
 							accountnamelbl.setVisible(false);
 							submit.setVisible(false);
 							color = new Color(0,255,0);
 							this.repaint();
-							
 							
 						}else {
 							JOptionPane.showMessageDialog(null, "Incorrect Pin","",JOptionPane.ERROR_MESSAGE);
@@ -217,20 +211,10 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 	  if(e.getSource()==submit1) {
 		  String pass = String.valueOf(password.getPassword());
 		  String conPass = String.valueOf(conpass.getPassword());
-		  
-		  boolean confirm = pass.equals(conPass);
-		  
-		  Pattern uppercasePattern = Pattern.compile("[A-Z]");
-	      Pattern lowercasePattern = Pattern.compile("[a-z]");
-		  Matcher uppercaseMatcher = uppercasePattern.matcher(pass);
-		  Matcher lowercaseMatcher = lowercasePattern.matcher(pass);
-		    
-		  boolean hasUppercase =uppercaseMatcher.find();
-		  boolean hasLowercase =lowercaseMatcher.find();
 		    
 		  if(pass.length()==0 || conPass.length()==0) {
 			  JOptionPane.showMessageDialog(null, "Fill The Blanks","",JOptionPane.ERROR_MESSAGE);
-		  }else if(!confirm) {
+		  }else if(!confirmPass(pass, conPass)) {
 			    JOptionPane.showMessageDialog(null, "Password does not match","",JOptionPane.ERROR_MESSAGE);
 			    
 		  }else if (!pass.contains("!") 
@@ -248,9 +232,9 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 					 && !pass.contains("=")
 					 && !pass.contains("+")){
 				
-				JOptionPane.showMessageDialog(null,"<html>" + "USE ATLEAST ONE SPECIAL CHARACTERS TO YOUR PASSWORD <br> (!,@,#,$,%,^,&,*,(,),-,_,=,+)" + "</html>","",JOptionPane.ERROR_MESSAGE );
+				JOptionPane.showMessageDialog(null,"Use atleast one special characters in your password (!,@,#,$,%,^,&,*,(,),-,_,=,+)","",JOptionPane.ERROR_MESSAGE );
 				
-		  }else if(!hasUppercase||!hasLowercase) {
+		  }else if(!hasUppercase(pass)||!hasLowercase(pass)) {
 				 JOptionPane.showMessageDialog(null, "Password must have atleast one Uppercase letter and atleast one Lowercase letter","",JOptionPane.ERROR_MESSAGE);
 				 
 		  }else if(pass.length()<8 || pass.length()>20){
@@ -281,6 +265,35 @@ public class ForgotPasswordPage extends JFrame implements ActionListener{
 		  
 	  }
 		
+	}
+	
+	boolean confirmPass(String password, String confirmPass) {
+		
+		if(password.equals(confirmPass)) return true;
+		
+		else return false;
+	}
+	
+	boolean hasUppercase(String pass) {
+		Pattern uppercasePattern = Pattern.compile("[A-Z]");
+		Matcher uppercaseMatcher = uppercasePattern.matcher(pass);
+		
+		if(uppercaseMatcher.find()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	boolean hasLowercase(String pass) {
+		Pattern lowercasePattern = Pattern.compile("[a-z]");
+	    Matcher lowercaseMatcher = lowercasePattern.matcher(pass);
+	    
+	    if(lowercaseMatcher.find()) {
+	    	return true;
+	    }else {
+	    	return false;
+	    }
 	}
 
 }

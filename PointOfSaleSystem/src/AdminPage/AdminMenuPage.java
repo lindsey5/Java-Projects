@@ -164,7 +164,7 @@ public class AdminMenuPage extends JPanel implements ActionListener, MenuInterfa
 				//System.out.println(itmcode);
 			    menuPanel.setPreferredSize(new Dimension(width, height));//Set the preferred size
 
-			    byte[] imageData = rs.getBytes("ItemImage");//Get the item image bytes
+			    byte[] imageData = rs.getBytes("ItemImage");//Get the item image from the database
 			    ImageIcon icon = new ImageIcon(imageData);//This converts bytes to image icon
 			    Image img = icon.getImage().getScaledInstance(125, 125, java.awt.Image.SCALE_AREA_AVERAGING);//This sets the size of the image 
 			    icon = new ImageIcon(img);
@@ -297,8 +297,9 @@ public class AdminMenuPage extends JPanel implements ActionListener, MenuInterfa
 		  int result = filechooser.showOpenDialog(null);
 		  //System.out.println(result);
 		  if(result != JFileChooser.APPROVE_OPTION) {
-		  return;
-	   }
+			  return;
+		  }
+		  
 	   File selectedFile = filechooser.getSelectedFile();
 		 
 		try {
@@ -314,8 +315,6 @@ public class AdminMenuPage extends JPanel implements ActionListener, MenuInterfa
 			 
 			 picture.setIcon(icon);
 			 
-			 
-			 
 		     }catch(IOException e1) {
 		    	 e1.printStackTrace();
 		     }
@@ -327,7 +326,7 @@ public class AdminMenuPage extends JPanel implements ActionListener, MenuInterfa
 		if(!itemname.getText().isEmpty() && !pricetxt.getText().isEmpty() && !itemCodetxt.getText().isEmpty() && imgData!=null ) {
 				
 			try {
-				//Insert item to the database
+				//Insert item to the database 
 				Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodsystemdb","root","");
 				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO menutable (itemcode,itemname,price,itemimage,category) VALUES(?,?,?,?,?)");
 				pstmt.setInt(1, Integer.parseInt(itemCodetxt.getText()));
@@ -342,11 +341,11 @@ public class AdminMenuPage extends JPanel implements ActionListener, MenuInterfa
 				dashBoard.setData();//Update the dash board
 			
 			
-		}catch(SQLException e1) {
-			JOptionPane.showMessageDialog(null, "Itemcode Already Exist");
-		}catch(NumberFormatException e1) {
-			e1.printStackTrace();
-		}
+			}catch(SQLException e1) {
+				JOptionPane.showMessageDialog(null, "Itemcode Already Exist");
+			}catch(NumberFormatException e1) {
+				e1.printStackTrace();
+			}
 				
 		}else {
 			JOptionPane.showMessageDialog(null, "Fill the Blanks","",JOptionPane.ERROR_MESSAGE);

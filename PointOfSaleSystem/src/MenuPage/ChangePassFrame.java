@@ -38,9 +38,7 @@ public class ChangePassFrame extends JFrame implements ActionListener{
 	JPasswordField conpass;
 	JLabel conpasslbl;
 	GradientButton submit1;
-    JCheckBox newPassCheckBox = new JCheckBox();
-    JCheckBox conPassCheckBox = new JCheckBox();
-    JCheckBox oldPassCheckBox = new JCheckBox();
+    JCheckBox newPassCheckBox = new JCheckBox(), conPassCheckBox = new JCheckBox(), oldPassCheckBox = new JCheckBox();
     boolean submitted = false;
     String accountname;
     JButton closeButton;
@@ -212,19 +210,10 @@ public class ChangePassFrame extends JFrame implements ActionListener{
 		 if(e.getSource()==submit1) {
 			  String pass = String.valueOf(newPassword.getPassword());
 			  String conPass = String.valueOf(conpass.getPassword());
-			  boolean confirm = pass.equals(conPass);
-			  
-			  Pattern uppercasePattern = Pattern.compile("[A-Z]");
-		      Pattern lowercasePattern = Pattern.compile("[a-z]");
-			  Matcher uppercaseMatcher = uppercasePattern.matcher(pass);
-			  Matcher lowercaseMatcher = lowercasePattern.matcher(pass);
-			    
-			  boolean hasUppercase =uppercaseMatcher.find();
-			  boolean hasLowercase =lowercaseMatcher.find();
 			  
 			  if(pass.length()==0 || conPass.length()==0) {
 				  JOptionPane.showMessageDialog(null, "Fill The Blanks","",JOptionPane.ERROR_MESSAGE);
-			  }else if(!confirm) {
+			  }else if(!confirmPass(pass, conPass)) {
 				    JOptionPane.showMessageDialog(null, "Password does not match","",JOptionPane.ERROR_MESSAGE);
 				    
 			  }else if (!pass.contains("!") 
@@ -242,9 +231,9 @@ public class ChangePassFrame extends JFrame implements ActionListener{
 						 && !pass.contains("=")
 						 && !pass.contains("+")){
 					
-					JOptionPane.showMessageDialog(null,"<html>" + "USE ATLEAST ONE SPECIAL CHARACTERS TO YOUR PASSWORD <br> (!,@,#,$,%,^,&,*,(,),-,_,=,+)" + "</html>","",JOptionPane.ERROR_MESSAGE );
+					JOptionPane.showMessageDialog(null,"Use atleast one special characters in your password (!,@,#,$,%,^,&,*,(,),-,_,=,+)","",JOptionPane.ERROR_MESSAGE );
 					
-			  }else if(!hasUppercase||!hasLowercase) {
+			  }else if(!hasUppercase(pass)||!hasLowercase(pass)) {
 					 JOptionPane.showMessageDialog(null, "Password must have atleast one Uppercase letter and atleast one Lowercase letter","",JOptionPane.ERROR_MESSAGE);
 					 
 			  }else if(pass.length()<8 || pass.length()>20){
@@ -277,5 +266,34 @@ public class ChangePassFrame extends JFrame implements ActionListener{
 				
 			}
 		}
+	
+	boolean confirmPass(String password, String confirmPass) {
+		
+		if(password.equals(confirmPass)) return true;
+		
+		else return false;
+	}
+	
+	boolean hasUppercase(String pass) {
+		Pattern uppercasePattern = Pattern.compile("[A-Z]");
+		Matcher uppercaseMatcher = uppercasePattern.matcher(pass);
+		
+		if(uppercaseMatcher.find()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	boolean hasLowercase(String pass) {
+		Pattern lowercasePattern = Pattern.compile("[a-z]");
+	    Matcher lowercaseMatcher = lowercasePattern.matcher(pass);
+	    
+	    if(lowercaseMatcher.find()) {
+	    	return true;
+	    }else {
+	    	return false;
+	    }
+	}
 	
 }

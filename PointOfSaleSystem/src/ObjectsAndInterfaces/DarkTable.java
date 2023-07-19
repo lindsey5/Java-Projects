@@ -67,11 +67,7 @@ public class DarkTable extends JTable {
 		public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int row, int column) {
 			Component com =  super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
 			if(isCellSelected(row, column)) {
-				if(row%2==0) {
-					com.setBackground(new Color(33,103,153));
-				}else {
-					com.setBackground(new Color(29,86,127));
-				}
+				com.setBackground(Color.RED);
 			}else {
 				if(row%2==0) {
 					com.setBackground(new Color(50,50,50));
@@ -79,7 +75,7 @@ public class DarkTable extends JTable {
 					com.setBackground(new Color(30,30,30));
 				}
 			}
-			com.setForeground(new Color(200,200,200));
+			com.setForeground(Color.WHITE);
 			setBorder(new EmptyBorder(0, 5, 0, 5));
 			return com;
 		}

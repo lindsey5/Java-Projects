@@ -41,8 +41,8 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 	private Reports reportPage = new Reports();
 	
 	private CategoryButton meals,drinks,sides,desserts,combo;
-	private boolean isSelected = false;//This is to show and hide category buttons
-	private boolean clicked = false; //This is to increased and decreased the width of rightPanel
+	private boolean showCategory = false; //This is to show and hide category buttons
+	private boolean increased = false; //This is to increased and decreased the width of rightPanel
 	
 	
 	public AdminWindow(){
@@ -54,50 +54,20 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 		combosMenu.displayMenu("Combo");
 		
 		meals = new CategoryButton("Meals");
-		meals.setPreferredSize(new Dimension(200-1,40));
-		meals.setFont(new Font("Callibri",Font.BOLD,13));
-		meals.setHorizontalAlignment(SwingConstants.CENTER);
-		meals.setForeground(Color.WHITE);
-		meals.setBackground(new Color(54,50,50));
-		meals.setBorder(null);
 		meals.addActionListener(this);
 		
 		drinks = new CategoryButton("Drinks");
-		drinks.setPreferredSize(new Dimension(200-1,40));
-		drinks.setFont(new Font("Callibri",Font.BOLD,13));
-		drinks.setHorizontalAlignment(SwingConstants.CENTER);
-		drinks.setForeground(Color.WHITE);
-		drinks.setBackground(new Color(54,50,50));
-		drinks.setBorder(null);
 		drinks.addActionListener(this);
 		
 		sides = new CategoryButton("Sides") ;
-		sides.setPreferredSize(new Dimension(200-1,40));
-		sides.setFont(new Font("Callibri",Font.BOLD,13));
-		sides.setHorizontalAlignment(SwingConstants.CENTER);
-		sides.setForeground(Color.WHITE);
-		sides.setBackground(new Color(54,50,50));
-		sides.setBorder(null);
 		sides.addActionListener(this);
 		
 		desserts = new CategoryButton("Desserts");
-		desserts.setPreferredSize(new Dimension(200-1,40));
-		desserts.setFont(new Font("Callibri",Font.BOLD,13));
-		desserts.setHorizontalAlignment(SwingConstants.CENTER);
-		desserts.setForeground(Color.WHITE);
-		desserts.setBackground(new Color(54,50,50));
-		desserts.setBorder(null);
 		desserts.addActionListener(this);
 		
 		combo = new CategoryButton("Combos");
-		combo.setPreferredSize(new Dimension(200-1,40));
-		combo.setFont(new Font("Callibri",Font.BOLD,13));
-		combo.setHorizontalAlignment(SwingConstants.CENTER);
-		combo.setForeground(Color.WHITE);
-		combo.setBackground(new Color(54,50,50));
-		combo.setBorder(null);
 		combo.addActionListener(this);
-		combo.last = true;
+		combo.setLast(true);
 				
 		ImageIcon icon = new ImageIcon("res/signout.png");
 		Image img = icon.getImage().getScaledInstance(25, 25, java.awt.Image.SCALE_AREA_AVERAGING);
@@ -166,7 +136,7 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				g2.setStroke(new BasicStroke(2f));
 				g2.setPaint(getForeground());
-				if(!isSelected) {
+				if(!showCategory) {
 					g2.drawLine(146, 28, 155, 35);
 					g2.drawLine(164, 28, 155, 35);
 				}else {
@@ -363,7 +333,7 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 		
 	}
 	
-	
+	@Override
     public void resetCategoryButtonsColor() {
     	meals.setBackground(new Color(54,50,50));
 		drinks.setBackground(new Color(54,50,50));
@@ -376,12 +346,12 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource()==button) {
-			if(!clicked) {
+			if(!increased) {
 				increasedRightPanelWidth();
-				clicked = true;
+				increased = true;
 			}else{
 				decreasedRightPanelWidth();
-				clicked = false;
+				increased = false;
 			}
 		}
 		
@@ -401,13 +371,13 @@ public class AdminWindow extends AbstractWindow implements ActionListener{
 			
 		}else if(e.getSource()==menu) {
 			
-			if(!isSelected) {
+			if(!showCategory) {
 				showCategoryButtons(); 
-				isSelected=true;
+				showCategory=true;
 				//menu.repaint();
 			}else {
 				hideCategoryButtons(); 
-				isSelected=false;	
+				showCategory=false;	
 				//menu.repaint();
 			}
 			rectY = menu.getY();

@@ -43,6 +43,7 @@ public class ProfilePage extends JPanel implements ActionListener {
 	GradientButton save;
 	
 	String username,password;
+	 
 	
 	byte[] imgData;
 	
@@ -168,8 +169,7 @@ public class ProfilePage extends JPanel implements ActionListener {
 		panel.add(save);
 		panel.add(changePass);
 		panel.add(changePin);
-
-		
+  
 		this.setLayout(new FlowLayout(FlowLayout.CENTER,0, 150));
 	    this.setBackground(Color.DARK_GRAY);
 		this.add(panel);

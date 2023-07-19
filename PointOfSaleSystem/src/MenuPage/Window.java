@@ -67,50 +67,20 @@ public class Window extends AbstractWindow implements ActionListener{
 		combosMenu.displayMenu("Combo");
 	
 		meals = new CategoryButton("Meals");
-		meals.setPreferredSize(new Dimension(200,40));
-		meals.setFont(new Font("Callibri",Font.BOLD,13));
-		meals.setHorizontalAlignment(SwingConstants.CENTER);
-		meals.setForeground(Color.WHITE);
-		meals.setBackground(Color.GREEN);
-		meals.setBorder(null);
 		meals.addActionListener(this);
 		
 		drinks = new CategoryButton("Drinks");
-		drinks.setPreferredSize(new Dimension(200,40));
-		drinks.setFont(new Font("Callibri",Font.BOLD,13));
-		drinks.setHorizontalAlignment(SwingConstants.CENTER);
-		drinks.setForeground(Color.WHITE);
-		drinks.setBackground(new Color(54,50,50));
-		drinks.setBorder(null);
 		drinks.addActionListener(this);
 		
 		sides = new CategoryButton("Sides") ;
-		sides.setPreferredSize(new Dimension(200-1,40));
-		sides.setFont(new Font("Callibri",Font.BOLD,13));
-		sides.setHorizontalAlignment(SwingConstants.CENTER);
-		sides.setForeground(Color.WHITE);
-		sides.setBackground(new Color(54,50,50));
-		sides.setBorder(null);
 		sides.addActionListener(this);
 		
 		desserts = new CategoryButton("Desserts");
-		desserts.setPreferredSize(new Dimension(200,40));
-		desserts.setFont(new Font("Callibri",Font.BOLD,13));
-		desserts.setHorizontalAlignment(SwingConstants.CENTER);
-		desserts.setForeground(Color.WHITE);
-		desserts.setBackground(new Color(54,50,50));
-		desserts.setBorder(null);
 		desserts.addActionListener(this);
 		
 		combo = new CategoryButton("Combos");
-		combo.setPreferredSize(new Dimension(200,40));
-		combo.setFont(new Font("Callibri",Font.BOLD,13));
-		combo.setHorizontalAlignment(SwingConstants.CENTER);
-		combo.setForeground(Color.WHITE);
-		combo.setBackground(new Color(54,50,50));
-		combo.setBorder(null);
 		combo.addActionListener(this);
-		combo.last = true;
+		combo.setLast(true);		
 		
 		ImageIcon logoutIcon = new ImageIcon("res/signout.png");
 		Image logoutImage = logoutIcon.getImage().getScaledInstance(25, 25, java.awt.Image.SCALE_AREA_AVERAGING);
