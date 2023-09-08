@@ -104,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		
 		if(obstacle.getX() < 0) {
-		    	newObstacle();
+			newObstacle();
 		}
 		
 		player.move();

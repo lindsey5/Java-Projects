@@ -19,9 +19,10 @@ public class Bullet extends Rectangle{
 	}
 	
 	void draw(Graphics g) {
+		
 		if(!intersectsWithEnemy) {
-		g.setColor(Color.RED);
-		g.fillRect(x, y, width, height);
+			g.setColor(Color.RED);
+			g.fillRect(x, y, width, height);
 		}
 	}
 	

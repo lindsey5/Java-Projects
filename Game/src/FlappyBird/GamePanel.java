@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -29,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Random random;
 	Pipe topPipe;
 	Pipe bottomPipe;
-	int pipeGap = 160;
+	int pipeGap = 140;
 	
 	int score = 0;
 	
@@ -144,7 +143,7 @@ public class GamePanel extends JPanel implements Runnable {
 		PIPE_HEIGHT = random.nextInt(GAME_HEIGHT - pipeGap);
 		
 		topPipe = new Pipe(GAME_WIDTH - PIPE_WIDTH, 0, PIPE_WIDTH, PIPE_HEIGHT);
-		bottomPipe = new Pipe(GAME_WIDTH - PIPE_WIDTH, PIPE_HEIGHT+pipeGap,PIPE_WIDTH,GAME_HEIGHT - PIPE_HEIGHT+pipeGap);
+		bottomPipe = new Pipe(GAME_WIDTH - PIPE_WIDTH, PIPE_HEIGHT+pipeGap,PIPE_WIDTH,GAME_HEIGHT - PIPE_HEIGHT - pipeGap);
 		
 	}
 	

@@ -63,26 +63,25 @@ public class Player extends Rectangle {
 		//This will drawn if the game is running
 		if(gamePanel.running) {
 		
+			//If isJumping is true 
+			if(isJumping) {
+				g.drawImage(runImages[2], x, y, width, height, null);
 		
-		//If isJumping is true 
-		if(isJumping) {
-			g.drawImage(runImages[2], x, y, width, height, null);
-		
-		//If isDown is true	
-		}else if(isDown) {
-			if(currentFrame < downImages.length)
-			g.drawImage(downImages[currentFrame], x, y, width, height, null);
+				//If isDown is true	
+			}else if(isDown) {
+				if(currentFrame < downImages.length)
+					g.drawImage(downImages[currentFrame], x, y, width, height, null);
 			
-		}else {
-			if(currentFrame < runImages.length)
-		    g.drawImage(runImages[currentFrame], x, y, width, height, null);
-		}
+			}else {
+				if(currentFrame < runImages.length)
+					g.drawImage(runImages[currentFrame], x, y, width, height, null);
+			}
 		
-		// Update the frame
-		frameTimer++;
-		if (frameTimer >=FRAME_DELAY) {
-			if(isDown) {
-				currentFrame = (currentFrame+1) % downImages.length;
+			// Update the frame
+			frameTimer++;
+			if (frameTimer >=FRAME_DELAY) {
+				if(isDown) {       
+					currentFrame = (currentFrame+1) % downImages.length;
 			}else {
 				currentFrame = (currentFrame+1) % runImages.length;
 			}
@@ -95,7 +94,7 @@ public class Player extends Rectangle {
 		y += yVelocity;
 		yVelocity =gravity;
 		
-		//If the y-coordinate of character is 290 isJumping variable will be false	
+		//If the y-coordinate of character is 290, isJumping variable will be false	
 		if(y == 290) {
 			isJumping = false;
 		}

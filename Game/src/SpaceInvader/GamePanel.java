@@ -29,12 +29,13 @@ public class GamePanel extends JPanel implements Runnable{
 		int x = 100;
 		int y = 100;
 		
-			Random random = new Random();
-			int xDirection = random.nextInt(2);
-			if(xDirection == 0) {
-				xDirection--;
+		Random random = new Random();
+		int xDirection = random.nextInt(2);
+		
+		if(xDirection == 0) {
+			xDirection--;
 				
-			}
+		}
 			
 		for(int i=0;i<10;i++) {
 			enemies.add(new Enemy(x,y,ENEMY_WIDTH,ENEMY_HEIGHT,this));
@@ -115,6 +116,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	void move() {
 		player.move();
+		
 		for(Enemy enemy : enemies) {
 			enemy.move();
 		}
@@ -141,14 +143,14 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		for(Bullet bullet : bullets) {
 			for(Enemy enemy : enemies) {
-			if(bullet.intersects(enemy) && !bullet.intersectsWithEnemy && !enemy.dead) {
-				enemy.lives--;
-				enemy.barValue -= 20;
-				bullet.intersectsWithEnemy = true;
-			}
-			if(enemy.lives==0) {
-				enemy.dead = true;
-			}
+				if(bullet.intersects(enemy) && !bullet.intersectsWithEnemy && !enemy.dead) {
+					enemy.lives--;
+					enemy.barValue -= 20;
+					bullet.intersectsWithEnemy = true;
+				}
+				if(enemy.lives==0) {
+					enemy.dead = true;
+				}
 			}
 		}
 		

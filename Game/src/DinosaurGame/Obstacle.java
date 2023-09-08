@@ -16,22 +16,22 @@ public class Obstacle extends Rectangle {
 	private int xVelocity;
 	private boolean passed = false;
 	private BufferedImage image;
-	private int id;
+	private int type;
 	
 	private int currentFrame;
 	private int frameTimer;
 	private static final int FRAME_DELAY = 9;
 	private BufferedImage[] birdImages = new BufferedImage[2];
 	
-	Obstacle(int x, int y, int WIDTH, int HEIGHT, int speed, int id){
+	Obstacle(int x, int y, int WIDTH, int HEIGHT, int speed, int type){
 		super(x, y, WIDTH, HEIGHT);
-		this.id = id;
+		this.type = type;
 		setXVelocity(speed);
 		
 		try {
-			if(id==0) {
+			if(type==0) {
 				image = ImageIO.read(getClass().getResourceAsStream("/DinosaurGame/cactus1.png"));
-			}else if(id==1){
+			}else if(type==1){
 				image = ImageIO.read(getClass().getResourceAsStream("/DinosaurGame/cactus2.png"));
 			}else {
 				birdImages[0] = ImageIO.read(getClass().getResourceAsStream("/DinosaurGame/bird-fly-1.png"));
@@ -46,8 +46,8 @@ public class Obstacle extends Rectangle {
 	}
 	
 	void draw(Graphics g) {
-		if(id == 0 || id == 1) {
-		g.drawImage(image, x-5, y-5, width+15, height+5, null);
+		if(type == 0 || type == 1) {
+			g.drawImage(image, x-5, y-5, width+15, height+5, null);
 		
 		}else {
 			g.drawImage(birdImages[currentFrame], x-10, y, width+10, height, null);
@@ -66,7 +66,7 @@ public class Obstacle extends Rectangle {
 	}
 	
 	void move() {
-		x+= xVelocity;
+		x += xVelocity;
 	}
 	
 	void setPassed(boolean passed) {
@@ -79,7 +79,7 @@ public class Obstacle extends Rectangle {
 	
 	
 	int getId() {
-		return id;
+		return type;
 	}
 
 }

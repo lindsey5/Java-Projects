@@ -32,7 +32,7 @@ public class Player extends Rectangle{
 	}
 	
 	void move() {
-		x= xPos;
+		x = xPos;
 	}
 	
 	void setXPosition(int xPos) {
